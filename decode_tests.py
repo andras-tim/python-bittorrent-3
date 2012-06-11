@@ -13,3 +13,7 @@ def test_decode_zero():
 # test that we can decode negative numbers.
 def test_decode_negative():
 	assert decode("i-3e") == -3
+
+# test we can decode numbers of more than one digit.
+def test_decode_multiple_digits():
+	assert decode("i100e") == 100
