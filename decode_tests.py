@@ -1,7 +1,7 @@
 # decode_tests.py -- tests for decoding bencoded data.
 # written by Joseph Salisbury -- 11/06/12
 
-from bencode import decode
+from bencode import decode, DecodeError
 
 def test_decode_int():
 	assert decode("i3e") == 3
@@ -21,3 +21,14 @@ def test_decode_multiple_digits():
 # test decode massive numbwe.
 def test_decode_massive():
 	assert decode("i10000000000000000000e") == 10000000000000000000
+
+# test error on padded zero
+def test_error_on_padded_zero():
+	error_raised = False
+
+	try:
+		decode("i04e")
+	except DecodeError:
+		error_raised = True
+
+	assert error_raised
