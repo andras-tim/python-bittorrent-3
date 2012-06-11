@@ -10,6 +10,7 @@ class DecodeError(Exception):
 	def __str__(self):
 		return repr(self.value)
 
+# regular expression to match a bencoded integer.
 BENCODED_INTEGER_RE = re.compile("i-*[0-9]+e")
 
 def decode(data):
