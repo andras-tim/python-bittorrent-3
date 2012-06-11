@@ -3,7 +3,7 @@
 
 import re
 
-BENCODED_INTEGER_RE = re.compile("i*[0-9]e")
+BENCODED_INTEGER_RE = re.compile("i-*[0-9]e")
 
 def decode(data):
 	if BENCODED_INTEGER_RE.match(data):

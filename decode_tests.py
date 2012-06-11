@@ -9,3 +9,7 @@ def test_decode_int():
 # test we can decode zero.
 def test_decode_zero():
 	assert decode("i0e") == 0
+
+# test that we can decode negative numbers.
+def test_decode_negative():
+	assert decode("i-3e") == -3
