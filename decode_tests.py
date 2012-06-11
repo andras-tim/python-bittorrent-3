@@ -17,3 +17,7 @@ def test_decode_negative():
 # test we can decode numbers of more than one digit.
 def test_decode_multiple_digits():
 	assert decode("i100e") == 100
+
+# test decode massive numbwe.
+def test_decode_massive():
+	assert decode("i10000000000000000000e") == 10000000000000000000
