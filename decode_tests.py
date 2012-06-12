@@ -11,6 +11,12 @@ def test_decode_empty_string():
 def test_decode_simple_string():
 	assert decode("4:spam") == "spam"
 
+# test that we can decode a longer string.
+def test_decode_long_string():
+	LONG_STRING = "antidisestablishmentarianism"
+
+	assert decode("28:" + LONG_STRING) == LONG_STRING
+
 def test_decode_int():
 	assert decode("i3e") == 3
 
