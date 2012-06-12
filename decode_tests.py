@@ -21,6 +21,7 @@ def test_decode_long_string():
 def test_decode_capital_letters():
 	assert decode("13:camelCaseTest") == "camelCaseTest"
 
+# test that we can decode an integer
 def test_decode_int():
 	assert decode("i3e") == 3
 
