@@ -7,6 +7,10 @@ from bencode import decode, DecodeError
 def test_decode_empty_string():
 	assert decode("0:") == ""
 
+# test that we can decode a simple string.
+def test_decode_simple_string():
+	assert decode("4:spam") == "spam"
+
 def test_decode_int():
 	assert decode("i3e") == 3
 
