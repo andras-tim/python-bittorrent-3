@@ -17,6 +17,10 @@ def test_decode_long_string():
 
 	assert decode("28:" + LONG_STRING) == LONG_STRING
 
+# test that we can decode a string with capital letters.
+def test_decode_capital_letters():
+	assert decode("13:camelCaseTest") == "camelCaseTest"
+
 def test_decode_int():
 	assert decode("i3e") == 3
 
