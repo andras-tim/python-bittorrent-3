@@ -3,6 +3,10 @@
 
 from bencode import decode, DecodeError
 
+# test that we can decode the empty string
+def test_decode_empty_string():
+	assert decode("0:") == ""
+
 def test_decode_int():
 	assert decode("i3e") == 3
 

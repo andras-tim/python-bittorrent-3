@@ -14,6 +14,9 @@ class DecodeError(Exception):
 # regular expression to match a bencoded integer.
 BENCODED_INTEGER_RE = re.compile("i-*[0-9]+e")
 
+# regular expression to match a bencoded string.
+BENCODED_STRING_RE = re.compile("[0-9]:")
+
 # function to decode bencoded strings.
 def decode(data):
 	# check to see if the data is an integer.
@@ -27,3 +30,7 @@ def decode(data):
 
 		# return an integer.
 		return int(number_string)
+
+	# check to see if the data is a string
+	elif BENCODED_STRING_RE.match(data):
+		return data[2:]
