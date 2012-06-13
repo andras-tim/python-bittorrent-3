@@ -8,6 +8,9 @@ BENCODED_STRING_RE = re.compile("[0-9]*:[a-zA-Z]*")
 # regular expression to match a bencoded integer.
 BENCODED_INTEGER_RE = re.compile("i-*[0-9]+e")
 
+# regular expression to match a bencoded list.
+BENCODED_LIST_RE = re.compile("le")
+
 # function to decode bencoded strings.
 def decode(data):
 	# check to see if the data is a string
@@ -18,3 +21,7 @@ def decode(data):
 	elif BENCODED_INTEGER_RE.match(data):
 		# remove the start and end delimeters, and return an integer.
 		return int(data[1:-1])
+
+	# check to see if the data is a list.
+	elif BENCODED_LIST_RE.match(data):
+		return []
