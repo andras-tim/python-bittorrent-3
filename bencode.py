@@ -3,14 +3,6 @@
 
 import re
 
-# Exception for decoding errors.
-class DecodeError(Exception):
-	def __init__(self, value):
-		self.value = value
-
-	def __str__(self):
-		return repr(self.value)
-
 # regular expression to match a bencoded string.
 BENCODED_STRING_RE = re.compile("[0-9]*:[a-zA-Z]*")
 
