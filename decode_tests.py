@@ -29,6 +29,11 @@ def test_decode_int():
 def test_decode_zero():
 	assert decode("i0e") == 0
 
+# test that we can decode negative zero.
+# this is not to the specification, but better in case of bad data.
+def test_decode_negative_zero():
+	assert decode("i-0e") == 0
+
 # test that we can decode negative numbers.
 def test_decode_negative():
 	assert decode("i-3e") == -3
