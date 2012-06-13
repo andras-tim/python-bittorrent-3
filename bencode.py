@@ -25,12 +25,5 @@ def decode(data):
 
 	# check to see if the data is an integer.
 	elif BENCODED_INTEGER_RE.match(data):
-		# remove the start and end delimeters.
-		number_string = data[1:-1]
-
-		# check no padding zeros.
-		if len(number_string) > 1 and number_string[0] == "0":
-			raise DecodeError("Padding zeros is not allowed.")
-
-		# return an integer.
-		return int(number_string)
+		# remove the start and end delimeters, and return an integer.
+		return int(data[1:-1])

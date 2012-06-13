@@ -41,13 +41,7 @@ def test_decode_multiple_digits():
 def test_decode_massive():
 	assert decode("i10000000000000000000e") == 10000000000000000000
 
-# test error on padded zero
+# test can successfully decode a zero padded number.
+# this is technically not correct, but it's better to try to succeed.
 def test_error_on_padded_zero():
-	error_raised = False
-
-	try:
-		decode("i04e")
-	except DecodeError:
-		error_raised = True
-
-	assert error_raised
+	assert decode("i04e") == 4
