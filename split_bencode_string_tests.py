@@ -9,3 +9,7 @@ def test_split_one_integer_string():
 # test we can split a one string bencoded string to itself.
 def test_split_one_string():
 	assert split("4:spam") == "4:spam"
+
+# test we can split two integers into a list of integer components.
+def test_split_two_integers():
+	assert split("i0ei0e") == ["i0e", "i0e"]

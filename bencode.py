@@ -36,10 +36,22 @@ def decode(data):
 
 # function to split a bencoded string into its components.
 def split(data):
-	# if data is just a number, just return it.
-	if BENCODED_INTEGER_RE.match(data):
+	# if data is only one number, just return it.
+	if len(BENCODED_INTEGER_RE.findall(data)) == 1:
 		return data
 
 	# if data is just a string, return it.
 	elif BENCODED_STRING_RE.match(data):
 		return data
+
+	# the data is some compound, so we'll have to work out the first part.
+	else:
+		# if the data is an integer,
+		if data[0] == "i":
+			# split it up, then recursively return.
+			partitioned_data = data.partition("e")
+			first_piece = partitioned_data[0] + partitioned_data[1]
+
+			response = []
+			response.extend([first_piece, split(partitioned_data[2])])
+			return response
