@@ -39,3 +39,7 @@ def split(data):
 	# if data is just a number, just return it.
 	if BENCODED_INTEGER_RE.match(data):
 		return data
+
+	# if data is just a string, return it.
+	elif BENCODED_STRING_RE.match(data):
+		return data
