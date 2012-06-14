@@ -41,7 +41,7 @@ def split(data):
 		return data
 
 	# if data is just a string, return it.
-	elif BENCODED_STRING_RE.match(data):
+	elif len(BENCODED_STRING_RE.findall(data)) == 1:
 		return data
 
 	# the data is some compound, so we'll have to work out the first part.
@@ -54,4 +54,14 @@ def split(data):
 
 			response = []
 			response.extend([first_piece, split(partitioned_data[2])])
+			return response
+
+		# if the data is a string,
+		if BENCODED_STRING_RE.match(data):
+			# partition the data, then recursively return.
+			p_d = data.partition(":")
+			first_piece = p_d[0] + p_d[1] + p_d[2][:int(p_d[0])]
+
+			response = []
+			response.extend([first_piece, split(data[:len(first_piece)])])
 			return response
