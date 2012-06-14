@@ -33,3 +33,9 @@ def decode(data):
 			# after removing the list delimeters,
 			# and add the returning data to the list.
 			return [decode(data[1:-1])]
+
+# function to split a bencoded string into its components.
+def split(data):
+	# if data is just a number, just return it.
+	if BENCODED_INTEGER_RE.match(data):
+		return data
