@@ -44,6 +44,10 @@ def split(data):
 	elif len(BENCODED_STRING_RE.sub("", data, count = 1)) == 0:
 		return [data]
 
+	# if data is just a list, return it.
+	elif len(BENCODED_LIST_RE.sub("", data, count = 1)) == 0:
+		return [data]
+
 	# the data is some compound, so we'll have to work out the first part.
 	else:
 		# if the data is an integer,

@@ -37,3 +37,7 @@ def test_split_string_integer():
 # test we can split a big crazy one.
 def test_split_big():
 	assert split("1:ai10e4:spam10:abcdefghiji-3e") == ["1:a", "i10e", "4:spam", "10:abcdefghij", "i-3e"]
+
+# test we can split an empty list to itself.
+def test_split_empty_list():
+	assert split("le") == ["le"]
