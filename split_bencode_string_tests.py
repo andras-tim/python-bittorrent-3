@@ -33,3 +33,7 @@ def test_split_integer_string():
 # test we can split a string and then an integer.
 def test_split_string_integer():
 	assert split("1:ai0e") == ["1:a", "i0e"]
+
+# test we can split a big crazy one.
+def test_split_big():
+	assert split("1:ai10e4:spam10:abcdefghiji-3e") == ["1:a", "i10e", "4:spam", "10:abcdefghij", "i-3e"]
