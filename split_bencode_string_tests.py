@@ -29,3 +29,7 @@ def test_split_three_strings():
 # test we can split an integer and a string.
 def test_split_integer_string():
 	assert split("i0e1:a") == ["i0e", "1:a"]
+
+# test we can split a string and then an integer.
+def test_split_string_integer():
+	assert split("1:ai0e") == ["1:a", "i0e"]
