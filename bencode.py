@@ -37,11 +37,11 @@ def decode(data):
 # function to split a bencoded string into its components.
 def split(data):
 	# if data is only one number, just return it.
-	if len(BENCODED_INTEGER_RE.findall(data)) == 1:
+	if len(BENCODED_INTEGER_RE.sub("", data, count = 1)) == 0:
 		return [data]
 
 	# if data is just a string, return it.
-	elif len(BENCODED_STRING_RE.findall(data)) == 1:
+	elif len(BENCODED_STRING_RE.sub("", data, count = 1)) == 0:
 		return [data]
 
 	# the data is some compound, so we'll have to work out the first part.

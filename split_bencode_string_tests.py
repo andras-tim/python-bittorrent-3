@@ -25,3 +25,7 @@ def test_split_three_integers():
 # test we can split three strings into a list of string components.
 def test_split_three_strings():
 	assert split("4:spam4:spam4:spam") == ["4:spam", "4:spam", "4:spam"]
+
+# test we can split an integer and a string.
+def test_split_integer_string():
+	assert split("i0e1:a") == ["i0e", "1:a"]
