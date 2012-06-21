@@ -63,7 +63,7 @@ def split(data):
 	# the data is some compound, so we'll have to work out the first part.
 	else:
 		# if the data is an integer,
-		if data[0] == "i":
+		if is_integer(data):
 			# split it up, then recursively return.
 			partitioned_data = data.partition("e")
 			first_piece = partitioned_data[0] + partitioned_data[1]
@@ -75,7 +75,7 @@ def split(data):
 			return response
 
 		# if the data is a string,
-		if BENCODED_STRING_RE.match(data):
+		if is_string(data):
 			# partition the data, then recursively return.
 			p_d = data.partition(":")
 			first_piece = p_d[0] + p_d[1] + p_d[2][:int(p_d[0])]
