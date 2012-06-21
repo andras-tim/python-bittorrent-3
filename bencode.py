@@ -19,6 +19,10 @@ def is_string(data):
 def is_integer(data):
 	return BENCODED_INTEGER_RE.match(data)
 
+# Return whether the string is a bencoded list.
+def is_list(data):
+	return BENCODED_LIST_RE.match(data)
+
 # function to decode bencoded strings.
 def decode(data):
 	# check to see if the data is a string
@@ -31,7 +35,7 @@ def decode(data):
 		return int(data[1:-1])
 
 	# check to see if the data is a list.
-	elif BENCODED_LIST_RE.match(data):
+	elif is_list(data):
 		# if it's an empty list,
 		if data == "le":
 			# return an empty list.
