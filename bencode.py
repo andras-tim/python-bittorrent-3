@@ -11,10 +11,14 @@ BENCODED_INTEGER_RE = re.compile("i-*[0-9]+e")
 # regular expression to match a bencoded list.
 BENCODED_LIST_RE = re.compile("l[:0-9a-zA-Z]*e")
 
+# Return the output of reg exp matching, as to whether it's a bencode string.
+def is_string(data):
+	return BENCODED_STRING_RE.match(data)
+
 # function to decode bencoded strings.
 def decode(data):
 	# check to see if the data is a string
-	if BENCODED_STRING_RE.match(data):
+	if is_string(data):
 		return data.partition(":")[2]
 
 	# check to see if the data is an integer.
