@@ -36,7 +36,7 @@ def decode(data):
 			# recursively decode the data,
 			# after removing the list delimeters,
 			# and add the returning data to the list.
-			return map(decode, split(data[1:-1]))
+			return list(map(decode, split(data[1:-1])))
 
 # function to split a bencoded string into its components.
 def split(data):
