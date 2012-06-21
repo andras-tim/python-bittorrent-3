@@ -1,4 +1,4 @@
 #!/bin/bash
 
-2to3 -j 2 *.py
+2to3 -j `grep -c processor /proc/cpuinfo` *.py
 nosetests
