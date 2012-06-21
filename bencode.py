@@ -15,6 +15,10 @@ BENCODED_LIST_RE = re.compile("l[:0-9a-zA-Z]*e")
 def is_string(data):
 	return BENCODED_STRING_RE.match(data)
 
+# Return whether the data is a bencoded integer.
+def is_integer(data):
+	return BENCODED_INTEGER_RE.match(data)
+
 # function to decode bencoded strings.
 def decode(data):
 	# check to see if the data is a string
@@ -22,7 +26,7 @@ def decode(data):
 		return data.partition(":")[2]
 
 	# check to see if the data is an integer.
-	elif BENCODED_INTEGER_RE.match(data):
+	elif is_integer(data):
 		# remove the start and end delimeters, and return an integer.
 		return int(data[1:-1])
 
