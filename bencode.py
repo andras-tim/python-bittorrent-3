@@ -36,17 +36,21 @@ def decode(data):
 			# recursively decode the data,
 			# after removing the list delimeters,
 			# and add the returning data to the list.
-			return [decode(data[1:-1])]
+			return map(decode, split(data[1:-1]))
 
 # function to split a bencoded string into its components.
 def split(data):
 	# if data is only one number, just return it.
-	if len(BENCODED_INTEGER_RE.findall(data)) == 1:
-		return data
+	if len(BENCODED_INTEGER_RE.sub("", data, count = 1)) == 0:
+		return [data]
 
 	# if data is just a string, return it.
-	elif len(BENCODED_STRING_RE.findall(data)) == 1:
-		return data
+	elif len(BENCODED_STRING_RE.sub("", data, count = 1)) == 0:
+		return [data]
+
+	# if data is just a list, return it.
+	elif len(BENCODED_LIST_RE.sub("", data, count = 1)) == 0:
+		return [data]
 
 	# the data is some compound, so we'll have to work out the first part.
 	else:
@@ -57,7 +61,9 @@ def split(data):
 			first_piece = partitioned_data[0] + partitioned_data[1]
 
 			response = []
-			response.extend([first_piece, split(partitioned_data[2])])
+			response.append(first_piece)
+			response.extend(split(partitioned_data[2]))
+
 			return response
 
 		# if the data is a string,
@@ -67,5 +73,7 @@ def split(data):
 			first_piece = p_d[0] + p_d[1] + p_d[2][:int(p_d[0])]
 
 			response = []
-			response.extend([first_piece, split(data[:len(first_piece)])])
+			response.append(first_piece)
+			response.extend(split(data[len(first_piece):]))
+
 			return response
