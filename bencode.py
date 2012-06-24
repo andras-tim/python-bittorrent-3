@@ -8,7 +8,9 @@ def decode(data):
 
 	# If the data is a bencoded list,
 	elif data.startswith("l") and data.endswith("e"):
-		return [decode(data[1:-1])]
+		items = split(data[1:-1])
+
+		return list(map(decode, items))
 
 	# If the data is a bencoded integer,
 	elif data.startswith("i") and data.endswith("e"):
@@ -28,3 +30,19 @@ def decode(data):
 
 		# then slice it out, and return a python string.
 		return data[offset:offset + string_length]
+
+def split(string):
+	# If the string is empty,
+	if string == "":
+		# return an empty list.
+		return []
+
+	# If the data starts with a number,
+	if string.startswith("i"):
+		length = string.find("e")
+
+		head = [string[:length + 1]]
+		rest_of_string = string[:len(head) - 1]
+		tail = split(rest_of_string)
+
+		return head.extend(tail)
