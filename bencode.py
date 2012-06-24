@@ -7,11 +7,11 @@ def decode(data):
 		return []
 
 	# If the data is a bencoded list,
-	elif data[0] == "l" and data[-1] == "e":
+	elif data.startswith("l") and data.endswith("e"):
 		return [decode(data[1:-1])]
 
 	# If the data is a bencoded integer,
-	elif data[0] == "i":
+	elif data.startswith("i") and data.endswith("e"):
 		# find the end of the integer,
 		length = data.find("e")
 
@@ -19,6 +19,7 @@ def decode(data):
 		return int(data[1:length])
 
 	# If the data is a bencoded string,
+	# (so, it starts with a number)
 	elif data[0] in list(map(str, list(range(10)))):
 		# work out how long the string is,
 		partitioned = data.partition(":")
