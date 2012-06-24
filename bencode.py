@@ -41,8 +41,6 @@ def split(string):
 	if string.startswith("i"):
 		length = string.find("e")
 
-		head = [string[:length + 1]]
-		rest_of_string = string[:len(head) - 1]
-		tail = split(rest_of_string)
-
-		return head.extend(tail)
+		items = []
+		items.append(string[:length + 1])
+		return items

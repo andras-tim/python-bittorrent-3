@@ -4,4 +4,8 @@ from bencode import split
 
 # test we can split an empty string.
 def test_empty_string():
-	assert split("" == [])
+	assert split("") == []
+
+# test we can split one integer.
+def test_split_one_integer():
+	assert split("i0e") == ["i0e"]
