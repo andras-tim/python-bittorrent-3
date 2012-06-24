@@ -38,9 +38,19 @@ def split(string):
 		return []
 
 	# If the data starts with a number,
-	if string.startswith("i"):
+	elif string.startswith("i"):
 		length = string.find("e")
 
 		items = []
 		items.append(string[:length + 1])
+		return items
+
+	# If the data starts with a bencoded string,
+	elif string[0] in list(map(str, list(range(10)))):
+		partitioned = string.partition(":")
+		offset = len(partitioned[0]) + 1
+		string_length = int(partitioned[0])
+
+		items = []
+		items.append(string[:offset + string_length])
 		return items
