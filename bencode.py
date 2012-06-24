@@ -54,4 +54,5 @@ def split(string):
 
 		items = []
 		items.append(string[:offset + string_length])
+		items.extend(split(string[offset + string_length:]))
 		return items
