@@ -1,88 +1,29 @@
 # bencode.py -- module for dealing with bencoded data.
 
-import re
-
-# regular expression to match a bencoded string.
-BENCODED_STRING_RE = re.compile("[0-9]*:[a-zA-Z]*")
-
-# regular expression to match a bencoded integer.
-BENCODED_INTEGER_RE = re.compile("i-*[0-9]+e")
-
-# regular expression to match a bencoded list.
-BENCODED_LIST_RE = re.compile("l[:0-9a-zA-Z]*e")
-
-# Create a function to match the regexp against some data.
-def is_bencoded_expression(regular_expression):
-	return lambda data: regular_expression.match(data)
-
-# Return the output of reg exp matching, as to whether it's a bencode string.
-is_string = is_bencoded_expression(BENCODED_STRING_RE)
-
-# Return whether the data is a bencoded integer.
-is_integer = is_bencoded_expression(BENCODED_INTEGER_RE)
-
-# Return whether the string is a bencoded list.
-is_list = is_bencoded_expression(BENCODED_LIST_RE)
-
-# function to decode bencoded strings.
 def decode(data):
-	# check to see if the data is a string
-	if is_string(data):
-		return data.partition(":")[2]
+	# If the data is an empty bencoded list,
+	if data == "le":
+		# return an empty python list.
+		return []
 
-	# check to see if the data is an integer.
-	elif is_integer(data):
-		# remove the start and end delimeters, and return an integer.
-		return int(data[1:-1])
+	# If the data is a bencoded list,
+	elif data[0] == "l" and data[-1] == "e":
+		return [decode(data[1:-1])]
 
-	# check to see if the data is a list.
-	elif is_list(data):
-		# if it's an empty list,
-		if data == "le":
-			# return an empty list.
-			return []
-		else:
-			# recursively decode the data,
-			# after removing the list delimeters,
-			# and add the returning data to the list.
-			return list(map(decode, split(data[1:-1])))
+	# If the data is a bencoded integer,
+	elif data[0] == "i":
+		# find the end of the integer,
+		length = data.find("e")
 
-# function to split a bencoded string into its components.
-def split(data):
-	# if data is only one number, just return it.
-	if len(BENCODED_INTEGER_RE.sub("", data, count = 1)) == 0:
-		return [data]
+		# then cut the string, and return a python integer.
+		return int(data[1:length])
 
-	# if data is just a string, return it.
-	elif len(BENCODED_STRING_RE.sub("", data, count = 1)) == 0:
-		return [data]
+	# If the data is a bencoded string,
+	elif data[0] in list(map(str, list(range(10)))):
+		# work out how long the string is,
+		partitioned = data.partition(":")
+		offset = len(partitioned[0]) + 1
+		string_length = int(partitioned[0])
 
-	# if data is just a list, return it.
-	elif len(BENCODED_LIST_RE.sub("", data, count = 1)) == 0:
-		return [data]
-
-	# the data is some compound, so we'll have to work out the first part.
-	else:
-		# if the data is an integer,
-		if is_integer(data):
-			# split it up, then recursively return.
-			partitioned_data = data.partition("e")
-			first_piece = partitioned_data[0] + partitioned_data[1]
-
-			response = []
-			response.append(first_piece)
-			response.extend(split(partitioned_data[2]))
-
-			return response
-
-		# if the data is a string,
-		if is_string(data):
-			# partition the data, then recursively return.
-			p_d = data.partition(":")
-			first_piece = p_d[0] + p_d[1] + p_d[2][:int(p_d[0])]
-
-			response = []
-			response.append(first_piece)
-			response.extend(split(data[len(first_piece):]))
-
-			return response
+		# then slice it out, and return a python string.
+		return data[offset:offset + string_length]

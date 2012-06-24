@@ -1,6 +1,6 @@
 # decode_tests.py -- tests for decoding bencoded data.
 
-from bencode import decode
+from bencode2 import decode
 
 # test that we can decode the empty string
 def test_decode_empty_string():

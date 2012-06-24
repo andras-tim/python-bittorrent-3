@@ -1,6 +1,6 @@
 # decode_list_tests.py -- tests for decoding lists.
 
-from bencode import decode
+from bencode2 import decode
 
 # test we can decode an empty list.
 def test_decode_empty_list():

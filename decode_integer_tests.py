@@ -1,6 +1,6 @@
 # decode_integer_tests.py -- tests for decoding bencoded integers.
 
-from bencode import decode
+from bencode2 import decode
 
 # test that we can decode an integer
 def test_decode_int():
