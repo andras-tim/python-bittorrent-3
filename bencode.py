@@ -43,6 +43,7 @@ def split(string):
 
 		items = []
 		items.append(string[:length + 1])
+		items.extend(split(string[length + 1:]))
 		return items
 
 	# If the data starts with a bencoded string,
