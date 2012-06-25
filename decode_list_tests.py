@@ -29,3 +29,7 @@ def test_decode_three_integer_list():
 # test we can decode a list with an integer and a string.
 def test_decode_integer_string_list():
 	assert decode("li0e4:spame") == [0, "spam"]
+
+# test we can decode an empty list within a list.
+def test_decode_empty_list_in_list():
+	assert decode("llee") == [[]]

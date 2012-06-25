@@ -1,8 +1,8 @@
 # bencode.py -- module for dealing with bencoded data.
 
 def decode(data):
-	# If the data is an empty bencoded list,
-	if data == "le":
+	# If the data is an empty bencoded string or list,
+	if data == "" or data == "le":
 		# return an empty python list.
 		return []
 
