@@ -21,3 +21,7 @@ def test_split_list():
 # test we can split multiple nested lists.
 def test_split_multiple_nested_lists():
 	assert split("llllleeeee") == ["lllleeee"]
+
+# test we can split a list containing an empty list and a string.
+def test_split_list_string():
+	assert split("lle4:spame") == ["le4:spam"]
