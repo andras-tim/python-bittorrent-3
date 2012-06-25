@@ -25,3 +25,7 @@ def test_decode_two_integer_list():
 # test we can decode a list with three integers in it.
 def test_decode_three_integer_list():
 	assert decode("li0ei0ei0ee") == [0, 0, 0]
+
+# test we can decode a list with an integer and a string.
+def test_decode_integer_string_list():
+	assert decode("li0e4:spame") == [0, "spam"]
