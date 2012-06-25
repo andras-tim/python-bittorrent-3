@@ -56,3 +56,18 @@ def split(string):
 		items.append(string[:offset + string_length])
 		items.extend(split(string[offset + string_length:]))
 		return items
+
+	# If the data starts with a bencoded list,
+	elif string.startswith("l"):
+		# find the end of this list:
+		list_count = 1
+		index = 1
+		while list_count != 0:
+			if string[index] == "l":
+				list_count += 1
+			elif string[index] == "e":
+				list_count -= 1
+
+			index += 1
+
+		return [string[1:index - 1]]
