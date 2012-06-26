@@ -71,3 +71,19 @@ def split(string):
 			index += 1
 
 		return [string[1:index - 1]]
+
+# function to go from python data to bencoded strings.
+def encode(data):
+	# if the data is a list,
+	if type(data) == list:
+		# encode all the containing data,
+		items = list(map(encode, data))
+
+		# put all the strings together,
+		bencoded_string = "l"
+		for item in items:
+			bencoded_string += items
+		bencoded_string += "e"
+
+		# and return!
+		return bencoded_string
