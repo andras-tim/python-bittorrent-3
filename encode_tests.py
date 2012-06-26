@@ -13,3 +13,7 @@ def test_encode_list_with_number():
 # test we can encode a list with three numbers in it.
 def test_encode_list_with_numbers():
 	assert encode([0, 1, 2]) == "li0ei1ei2ee"
+
+# test we can encode a list with a list in it.
+def test_encode_nested_list():
+	assert encode([[]]) == "llee"
