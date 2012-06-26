@@ -9,3 +9,7 @@ def test_encode_list():
 # test we can encode a list with a single number in it.
 def test_encode_list_with_number():
 	assert encode([0]) == "li0ee"
+
+# test we can encode a list with three numbers in it.
+def test_encode_list_with_numbers():
+	assert encode([0, 1, 2]) == "li0ei1ei2ee"
