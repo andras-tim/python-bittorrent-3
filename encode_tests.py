@@ -25,3 +25,6 @@ def test_encode_number():
 # test we can encode a string.
 def test_encode_string():
 	assert encode("spam") == "4:spam"
+
+# test we can encode a list containing a string.
+	assert encode(["spam"]) == "l4:spame"
