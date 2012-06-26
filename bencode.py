@@ -82,8 +82,13 @@ def encode(data):
 		# put all the strings together,
 		bencoded_string = "l"
 		for item in items:
-			bencoded_string += items
+			bencoded_string += item
 		bencoded_string += "e"
 
 		# and return!
 		return bencoded_string
+
+	# if the data is a number,
+	if type(data) == int:
+		# encode the number
+		return "i" + str(data) + "e"
