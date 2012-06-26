@@ -89,3 +89,8 @@ def encode(data):
 	if type(data) == int:
 		# encode the number
 		return "i" + str(data) + "e"
+
+	# if the data is a string,
+	if type(data) == str:
+		# encode the string and return it.
+		return str(len(data)) + ":" + data

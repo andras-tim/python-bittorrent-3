@@ -21,3 +21,7 @@ def test_encode_nested_list():
 # test we can encode a number.
 def test_encode_number():
 	assert encode(0) == "i0e"
+
+# test we can encode a string.
+def test_encode_string():
+	assert encode("spam") == "4:spam"
