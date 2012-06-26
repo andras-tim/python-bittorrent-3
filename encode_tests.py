@@ -17,3 +17,7 @@ def test_encode_list_with_numbers():
 # test we can encode a list with a list in it.
 def test_encode_nested_list():
 	assert encode([[]]) == "llee"
+
+# test we can encode a number.
+def test_encode_number():
+	assert encode(0) == "i0e"
