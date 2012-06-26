@@ -87,6 +87,10 @@ def encode(data):
 
 	# if the data is a dictionary,
 	if type(data) == dict:
+		# check that all the keys are strings (in the spec),
+		for key in data:
+			assert type(key) == str
+
 		# encode all the keys and values
 		encoded_keys = list(map(encode, list(data.keys())))
 		encoded_values = list(map(encode, list(data.values())))

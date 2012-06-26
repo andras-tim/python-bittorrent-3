@@ -34,3 +34,13 @@ def test_encode_list_with_string():
 def test_encode_empty_dictionary():
 	assert encode({}) == "de"
 
+# test an assertion is raised if all dictionary keys aren't strings.
+def test_error_dictionary_keys_arent_strings():
+	error = False
+
+	try:
+		encode({1:"a"})
+	except AssertionError as e:
+		error = True
+
+	assert error
