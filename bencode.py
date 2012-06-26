@@ -76,12 +76,9 @@ def split(string):
 def encode(data):
 	# if the data is a list,
 	if type(data) == list:
-		# encode all the containing data,
-		items = list(map(encode, data))
-
-		# put all the strings together,
+		# put all the encoded strings together,
 		bencoded_string = "l"
-		for item in items:
+		for item in map(encode, data):
 			bencoded_string += item
 		bencoded_string += "e"
 
