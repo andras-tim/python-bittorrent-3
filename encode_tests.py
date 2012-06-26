@@ -28,3 +28,6 @@ def test_encode_string():
 
 # test we can encode a list containing a string.
 	assert encode(["spam"]) == "l4:spame"
+
+# test we can encode an empty dictionary.
+	assert encode({}) == "de"

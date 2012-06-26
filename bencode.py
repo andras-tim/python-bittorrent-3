@@ -85,6 +85,22 @@ def encode(data):
 		# and return!
 		return bencoded_string
 
+	# if the data is a dictionary,
+	if type(data) == dict:
+		# encode all the keys and values
+		encoded_keys = list(map(encode, list(data.keys())))
+		encoded_values = list(map(encode, list(data.values())))
+
+		# put all the encoded strings together,
+		bencoded_string = "d"
+		for i in range(len(encoded_keys)):
+			bencoded_string += encoded_keys[i]
+			bencoded_string += encoded_values[i]
+		bencoded_string += "e"
+
+		# and return!
+		return bencoded_string
+
 	# if the data is a number,
 	if type(data) == int:
 		# encode the number
