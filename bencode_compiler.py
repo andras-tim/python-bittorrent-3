@@ -10,6 +10,14 @@ class node():
 	def __eq__(self, other):
 		return self.data == other.data
 
+	# emit the node as a python object.
+	def emit_python_object(self):
+		# if the data is an integer,
+		if self.data.startswith("i"):
+			# return a python integer
+			end_index = self.data.find("e")
+			return int(self.data[1:end_index])
+
 # turn a string of bencoded data into a tokenised list.
 def tokenise(data):
 	# if the data is a bencoded integer.
@@ -24,3 +32,8 @@ def parse(tokens):
 	if tokens[0].startswith("i"):
 		# then just make a node out of the token.
 		return node(tokens[0])
+
+# turn a parse tree into a python object.
+def emit(parse_tree):
+	# just go through the tree.
+	return parse_tree.emit_python_object()
