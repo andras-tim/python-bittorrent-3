@@ -15,3 +15,7 @@ def test_parse_integer():
 def test_emit_integer():
 	integer_node = node("i0e")
 	assert emit(integer_node) == 0
+
+# test we can tokenise an empty list.
+def test_tokenise_empty_list():
+	assert tokenise("le") == ["l", "e"]

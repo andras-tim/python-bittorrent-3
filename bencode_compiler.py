@@ -20,11 +20,34 @@ class node():
 
 # turn a string of bencoded data into a tokenised list.
 def tokenise(data):
-	# if the data is a bencoded integer.
-	if data.startswith("i"):
-		# find the end, and splice it out.
-		end_index = data.find("e")
-		return [data[:end_index + 1]]
+	pointer = 0
+	tokens = []
+
+	# while the pointer is within the string,
+	while pointer < len(data):
+		# if the pointer is a bencoded integer,
+		if data[pointer] == "i":
+			# find the end, add it to the tokens,
+			end_index = data.find("e") + 1
+			tokens.append(data[:end_index])
+			# and add the length of the integer to the pointer.
+			pointer += end_index
+
+		# if the data is a list,
+		elif data[pointer] == "l":
+			# add the token,
+			tokens.append("l")
+			# and move the pointer on one.
+			pointer += 1
+
+		# if the data is the end of a list or dict,
+		elif data[pointer] == "e":
+			# add the token,
+			tokens.append("e")
+			# and move the pointer on one.
+			pointer += 1
+
+	return tokens
 
 # turn a list of tokens into a parse tree.
 def parse(tokens):
