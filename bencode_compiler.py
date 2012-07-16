@@ -56,6 +56,11 @@ def parse(tokens):
 		# then just make a node out of the token.
 		return node(tokens[0])
 
+	# if the first token is a list,
+	if tokens[0] == "l":
+		# return an empty node, to represent a list.
+		return node(None)
+
 # turn a parse tree into a python object.
 def emit(parse_tree):
 	# just go through the tree.

@@ -1,6 +1,6 @@
 # compiler_tests.py -- tests for the bencode compiler_tests
 
-from bencode_compiler import tokenise, parse, node, emit
+from bencode_compiler import tokenise, parse, emit, node
 
 # test we can tokenise a bencoded integer.
 def test_tokenise_integer():
@@ -17,3 +17,11 @@ def test_emit_integer():
 # test we can tokenise an empty list.
 def test_tokenise_empty_list():
 	assert tokenise("le") == ["l", "e"]
+
+# test we can parse a list into a list node.
+def test_parse_empty_list():
+	assert parse(["l", "e"]) == node(None)
+
+# test when we parse an empty list, the list node has no children.
+def test_parse_empty_list_children():
+	assert parse(["l", "e"]).data == None
