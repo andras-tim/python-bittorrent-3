@@ -8,13 +8,11 @@ def test_tokenise_integer():
 
 # test we can parse an integer into a tree (albeit with one node).
 def test_parse_integer():
-	integer_node = node("i0e")
-	assert parse(["i0e"]) == integer_node
+	assert parse(["i0e"]) == node("i0e")
 
 # test we can convert a parse tree into a python object.
 def test_emit_integer():
-	integer_node = node("i0e")
-	assert emit(integer_node) == 0
+	assert emit(node("i0e")) == 0
 
 # test we can tokenise an empty list.
 def test_tokenise_empty_list():
