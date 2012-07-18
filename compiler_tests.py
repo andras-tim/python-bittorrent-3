@@ -25,3 +25,7 @@ def test_parse_empty_list():
 # test when we parse an empty list, the list node has no children.
 def test_parse_empty_list_children():
 	assert parse(["l", "e"]).children == None
+
+# test we can convert a parse tree of an empty list into a python object/
+def test_emit_empty_list():
+	assert emit(list_node()) == []

@@ -28,6 +28,10 @@ class list_node():
 	def __eq__(self, other):
 		return self.children == other.children
 
+	# emit the node as a python object.
+	def emit_python_object(self):
+		return []
+
 # turn a string of bencoded data into a tokenised list.
 def tokenise(data):
 	pointer = 0
