@@ -5,7 +5,8 @@ from bencode_compiler import tokenise, parse, emit, node, list_node
 tokenise_test_data = [
 	["i0e",	["i0e"]],
 	["le",	["l", "e"]],
-	["li0ee", ["l", "i0e", "e"]]
+	["li0ee", ["l", "i0e", "e"]],
+	["li0ei0ei0ee", ["l", "i0e", "i0e", "i0e", "e"]]
 ]
 
 # spin through the tokenised test data, and generate tests.
