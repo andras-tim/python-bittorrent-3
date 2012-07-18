@@ -20,15 +20,19 @@ class TestParse():
 
 	# test we can parse a list into a list node.
 	def test_parse_empty_list(self):
-		assert parse(["l", "e"]) == list_node()
+		assert parse(["l", "e"]) == list_node([])
 
 	# test the empty list node has no children
 	def test_parse_empty_list_children(self):
-		assert parse(["l", "e"]).children == []
+		result = parse(["l", "e"])
+		assert result.children == []
 
 	# test we can parse the tokens of a list with an integer.
 	def test_parse_list_with_integer(self):
-		assert parse(["l", "i0e", "e"]) == list_node()
+		expected = list_node([])
+		expected.children.append(node("i0e"))
+
+		assert parse(["l", "i0e", "e"]) == expected
 
 	# test the integer list node has one child.
 	def test_parse_integer_list_children(self):
@@ -41,7 +45,7 @@ class TestEmit():
 
 	# test we can convert a parse tree of an empty list into a python object/
 	def test_emit_empty_list(self):
-		assert emit(list_node()) == []
+		assert emit(list_node([])) == []
 
 	# test we can convert a tree of a list with an integer into a python object.
 	def test_emit_list_with_integer(self):
