@@ -42,10 +42,11 @@ def tokenise(data):
 		# if the pointer is a bencoded integer,
 		if data[pointer] == "i":
 			# find the end, add it to the tokens,
-			end_index = data.find("e") + 1
-			tokens.append(data[:end_index])
-			# and add the length of the integer to the pointer.
-			pointer += end_index
+			end_index = data.find("e", pointer) + 1
+			tokens.append(data[pointer:end_index])
+			# and as find returns us an index in relation to the
+			# entire string, just set the pointer to the end index.
+			pointer = end_index
 
 		# if the data is a list,
 		elif data[pointer] == "l":

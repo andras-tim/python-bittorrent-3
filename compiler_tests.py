@@ -29,3 +29,7 @@ def test_parse_empty_list_children():
 # test we can convert a parse tree of an empty list into a python object/
 def test_emit_empty_list():
 	assert emit(list_node()) == []
+
+# test we can tokenise a list containing a bencoded integer.
+def test_tokenise_list_with_integer():
+	assert tokenise("li0ee") == ["l", "i0e", "e"]
