@@ -7,7 +7,8 @@ tokenise_test_data = [
 	["le",	["l", "e"]],
 	["li0ee", ["l", "i0e", "e"]],
 	["li0ei0ei0ee", ["l", "i0e", "i0e", "i0e", "e"]],
-	["llee", ["l", "l", "e", "e"]]
+	["llee", ["l", "l", "e", "e"]],
+	["li0elei0ee", ["l", "i0e", "l", "e", "i0e", "e"]]
 ]
 
 # spin through the tokenised test data, and generate tests.
