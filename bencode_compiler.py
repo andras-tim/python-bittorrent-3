@@ -18,6 +18,16 @@ class node():
 			end_index = self.data.find("e")
 			return int(self.data[1:end_index])
 
+# a node for a list in the bencode parse tree
+class list_node():
+	# initialise the node with the children's data.
+	def __init__(self, children = None):
+		self.children = children
+
+	# two lists are equal if they contain the same items.
+	def __eq__(self, other):
+		return self.children == other.children
+
 # turn a string of bencoded data into a tokenised list.
 def tokenise(data):
 	pointer = 0
@@ -59,7 +69,7 @@ def parse(tokens):
 	# if the first token is a list,
 	if tokens[0] == "l":
 		# return an empty node, to represent a list.
-		return node(None)
+		return list_node()
 
 # turn a parse tree into a python object.
 def emit(parse_tree):
