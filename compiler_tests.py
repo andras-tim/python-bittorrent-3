@@ -41,6 +41,10 @@ class TestParse():
 	def test_parse_integer_list_children(self):
 		assert parse(["l", "i0e", "e"]).children == [node("i0e")]
 
+	# test we can parse embedded lists.
+	def test_parse_embedded_list(self):
+		assert parse(["l", "l", "e", "e"]) == list_node(list_node([]))
+
 class TestEmit():
 	# test we can convert a parse tree into a python object.
 	def test_emit_integer(self):
