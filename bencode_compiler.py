@@ -26,11 +26,14 @@ class list_node():
 
 	# two lists are equal if they contain the same items.
 	def __eq__(self, other):
+		print "Self children:", self.children
+		print "Other children:", other.children
+
 		return self.children == other.children
 
 	# emit the node as a python object.
 	def emit_python_object(self):
-		return []
+		return map(lambda x: x.emit_python_object(), self.children)
 
 # turn a string of bencoded data into a tokenised list.
 def tokenise(data):
