@@ -21,7 +21,7 @@ class node():
 # a node for a list in the bencode parse tree
 class list_node():
 	# initialise the node with the children's data.
-	def __init__(self, children = None):
+	def __init__(self, children = []):
 		self.children = children
 
 	# two lists are equal if they contain the same items.
@@ -73,8 +73,16 @@ def parse(tokens):
 
 	# if the first token is a list,
 	if tokens[0] == "l":
+		associated_end = tokens.index("e")
+
 		# return an empty node, to represent a list.
-		return list_node()
+		l = list_node()
+
+		for i in range(1, associated_end):
+			data = parse([tokens[i]])
+			l.children.append(data)
+
+		return l
 
 # turn a parse tree into a python object.
 def emit(parse_tree):

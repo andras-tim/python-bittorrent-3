@@ -23,7 +23,7 @@ def test_parse_empty_list():
 	result = parse(["l", "e"])
 
 	assert result == list_node()
-	assert result.children == None	# test the list node has no children.
+	assert result.children == []	# test the list node has no children.
 
 # test we can convert a parse tree of an empty list into a python object/
 def test_emit_empty_list():
@@ -32,3 +32,10 @@ def test_emit_empty_list():
 # test we can tokenise a list containing a bencoded integer.
 def test_tokenise_list_with_integer():
 	assert tokenise("li0ee") == ["l", "i0e", "e"]
+
+# test we can parse the tokens of a list with an integer.
+def test_parse_list_with_integer():
+	result = parse(["l", "i0e", "e"])
+
+	assert result == list_node()
+	assert result.children == [node("i0e")]
