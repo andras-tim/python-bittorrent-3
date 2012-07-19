@@ -60,6 +60,20 @@ def tokenise(data):
 			# entire string, just set the pointer to the end index.
 			pointer = end_index
 
+		# if the pointer is a bencoded string,
+		elif data[pointer] in map(str, list(range(10))):
+			partitioned_string = data.partition(":")
+			offset = len(str(partitioned_string[0])) + 1
+			string_length = int(partitioned_string[0])
+
+			print partitioned_string
+			print offset
+			print string_length
+
+			string = data[pointer + offset:pointer + offset + string_length]
+			tokens.append(string)
+			pointer += offset + string_length
+
 		# if the data is a list,
 		elif data[pointer] == "l":
 			# add the token,
