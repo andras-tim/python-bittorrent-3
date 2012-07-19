@@ -9,7 +9,16 @@ decode_test_data = [
 	["i-3e", -3],
 	["i100e", 100],
 	["i10000000000000000000e", 10000000000000000000],
-	["i04e", 4]
+	["i04e", 4],
+
+	["le", []],
+	["li0ee", [0]],
+	["l4:spame", ["spam"]],
+	["l4:spam4:spame", ["spam", "spam"]],
+	["li0ei0ee", [0, 0]],
+	["li0ei0ei0ee", [0, 0, 0]],
+	["li0e4:spame", [0, "spam"]],
+	["llee", [[]]]
 ]
 
 # spin through the decode test data, and generate tests.

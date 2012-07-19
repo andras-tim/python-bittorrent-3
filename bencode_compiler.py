@@ -18,6 +18,12 @@ class node():
 			end_index = self.data.find("e")
 			return int(self.data[1:end_index])
 
+		# if the data is a string,
+		if self.data[0] in map(str, list(range(10))):
+			partitioned = self.data.partition(":")
+			offset = len(str(partitioned[0])) + 1
+			return str(self.data[offset:])
+
 # a node for a list in the bencode parse tree
 class list_node():
 	# initialise the node with the children's data.
@@ -62,15 +68,11 @@ def tokenise(data):
 
 		# if the pointer is a bencoded string,
 		elif data[pointer] in map(str, list(range(10))):
-			partitioned_string = data.partition(":")
+			partitioned_string = data[pointer:].partition(":")
 			offset = len(str(partitioned_string[0])) + 1
 			string_length = int(partitioned_string[0])
 
-			print partitioned_string
-			print offset
-			print string_length
-
-			string = data[pointer + offset:pointer + offset + string_length]
+			string = data[pointer:pointer + offset + string_length]
 			tokens.append(string)
 			pointer += offset + string_length
 
@@ -94,6 +96,11 @@ def tokenise(data):
 def parse(tokens):
 	# if the first token is an integer,
 	if tokens[0].startswith("i"):
+		# then just make a node out of the token.
+		return node(tokens[0])
+
+	# if the first token is a string,
+	if tokens[0][0] in map(str, list(range(10))):
 		# then just make a node out of the token.
 		return node(tokens[0])
 
