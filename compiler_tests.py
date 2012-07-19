@@ -58,6 +58,10 @@ class TestEmit():
 	def test_emit_list_with_integer(self):
 		assert emit(parse(["l", "i0e", "e"])) == [0]
 
+	# test we can convert an embedded list into a python object.
+	def test_emit_embedded_list(self):
+		assert emit(parse(["l", "l", "e", "e"])) == [[]]
+
 class TestListRindex():
 	# test we can get the index on a simple list.
 	def test_one_item_list(self):
