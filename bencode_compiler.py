@@ -32,6 +32,18 @@ class list_node():
 	def emit_python_object(self):
 		return map(lambda x: x.emit_python_object(), self.children)
 
+# like list.index(), but give the highest index.
+def rindex(needle, haystack):
+	i = len(haystack) - 1
+
+	while i != -1:
+		if haystack[i] == needle:
+			return i
+
+		i -= 1
+
+	raise ValueError
+
 # turn a string of bencoded data into a tokenised list.
 def tokenise(data):
 	pointer = 0
@@ -73,14 +85,19 @@ def parse(tokens):
 
 	# if the first token is a list,
 	if tokens[0] == "l":
-		associated_end = tokens.index("e")
+		# and is an empty list, return a node.
+		if tokens[1] == "e":
+			return list_node([])
 
-		# return an empty node, to represent a list.
+		# otherwise, find the other end of this list,
+		associated_end = rindex("e", tokens)
+
+		# construct an empty node, to represent the list,
 		l = list_node([])
 
-		for i in range(1, associated_end):
-			data = parse([tokens[i]])
-			l.children.append(data)
+		# and then parse all the tokens inside, and add them to the node.
+		parsed_inner_tokens = parse(tokens[1:associated_end])
+		l.children.append(parsed_inner_tokens)
 
 		return l
 

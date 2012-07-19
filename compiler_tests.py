@@ -1,6 +1,6 @@
 # compiler_tests.py -- tests for the bencode compiler_tests
 
-from bencode_compiler import tokenise, parse, emit, node, list_node
+from bencode_compiler import tokenise, parse, emit, node, list_node, rindex
 
 tokenise_test_data = [
 	["i0e",	["i0e"]],
@@ -43,7 +43,7 @@ class TestParse():
 
 	# test we can parse embedded lists.
 	def test_parse_embedded_list(self):
-		assert parse(["l", "l", "e", "e"]) == list_node(list_node([]))
+		assert parse(["l", "l", "e", "e"]) == list_node([list_node([])])
 
 class TestEmit():
 	# test we can convert a parse tree into a python object.
@@ -57,3 +57,23 @@ class TestEmit():
 	# test we can convert a tree of a list with an integer into a python object.
 	def test_emit_list_with_integer(self):
 		assert emit(parse(["l", "i0e", "e"])) == [0]
+
+class TestListRindex():
+	# test we can get the index on a simple list.
+	def test_one_item_list(self):
+		rindex(1, [1]) == 0
+
+	# test we can get the index on a larger list.
+	def test_three_item_list(self):
+		rindex(1, [1, 2, 1, 2]) == 2
+
+	# test a ValueError is raised if the target is not in the list.
+	def test_item_not_in_list(self):
+		exceptionRaised = False
+
+		try:
+			rindex(0, [1])
+		except ValueError:
+			exceptionRaised = True
+
+		assert exceptionRaised
