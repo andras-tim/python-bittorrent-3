@@ -45,6 +45,11 @@ class TestParse():
 	def test_parse_embedded_list(self):
 		assert parse(["l", "l", "e", "e"]) == list_node([list_node([])])
 
+	# test we can parse a triply embedded list.
+	def test_parse_triply_embedded_list(self):
+		expected = list_node([list_node([list_node([])])])
+		assert parse(["l", "l", "l", "e", "e", "e"]) == expected
+
 class TestEmit():
 	# test we can convert a parse tree into a python object.
 	def test_emit_integer(self):
