@@ -18,10 +18,14 @@ decode_test_data = [
 	["li0ei0ee", [0, 0]],
 	["li0ei0ei0ee", [0, 0, 0]],
 	["li0e4:spame", [0, "spam"]],
-	["llee", [[]]]
+	["llee", [[]]],
+	["li0eli0ei0eee", [0, [0, 0]]]
 ]
 
 # spin through the decode test data, and generate tests.
 def test_decode():
 	for i in decode_test_data:
-		yield lambda x, y: decode(x) == y, i[0], i[1]
+		yield check_decode, i[0], i[1]
+
+def check_decode(x, y):
+		assert decode(x) == y
