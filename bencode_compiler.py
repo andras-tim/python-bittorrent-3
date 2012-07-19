@@ -105,3 +105,9 @@ def parse(tokens):
 def emit(parse_tree):
 	# just go through the tree.
 	return parse_tree.emit_python_object()
+
+# decode a bencoded string.
+def decode(bencoded_string):
+	tokens = tokenise(bencoded_string)
+	parse_tree = parse(tokens)
+	return emit(parse_tree)
