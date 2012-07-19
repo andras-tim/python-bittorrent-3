@@ -15,7 +15,7 @@ tokenise_test_data = [
 # spin through the tokenised test data, and generate tests.
 def test_tokenise():
 	for i in tokenise_test_data:
-		yield tokenise, i[0], i[1]
+		yield check_tokenise, i[0], i[1]
 
 def check_tokenise(x, y):
 	assert tokenise(x) == y
