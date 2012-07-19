@@ -15,7 +15,10 @@ tokenise_test_data = [
 # spin through the tokenised test data, and generate tests.
 def test_tokenise():
 	for i in tokenise_test_data:
-		yield lambda x, y: tokenise(x) == y, i[0], i[1]
+		yield tokenise, i[0], i[1]
+
+def check_tokenise(x, y):
+	assert tokenise(x) == y
 
 class TestParse():
 	# test we can parse an integer into a tree (albeit with one node).
