@@ -94,6 +94,8 @@ def tokenise(data):
 
 # turn a list of tokens into a parse tree.
 def parse(tokens):
+	print "Parse: tokens:", tokens
+
 	# if the first token is an integer,
 	if tokens[0].startswith("i"):
 		# then just make a node out of the token.
